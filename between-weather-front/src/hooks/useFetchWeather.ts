@@ -14,7 +14,7 @@ interface FetchWeatherProps {
 
 const fetchWeather = async (city: string) => {
   const instance = axios.create({
-    baseURL: "http://localhost:4000",
+    baseURL: "https://between-nodejs.herokuapp.com",
     headers: axiosConfig,
   });
 
