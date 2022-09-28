@@ -9,6 +9,7 @@ import Moment from "react-moment";
 import "moment/locale/es";
 import useFetchWeather from "../hooks/useFetchWeather";
 import useWeather from "../hooks/useWeather";
+import WeatherHourly from "./WeatherHourly";
 
 interface DailyProps {
   day: Date;
@@ -147,60 +148,11 @@ const WeatherDaily = () => {
             ))}
           </Grid>
 
-          {dailyData ? (
-            <>
-              <Typography
-                variant="h4"
-                gutterBottom
-                sx={{
-                  margin: "4rem 0 2rem 0",
-                }}
-              >
-                Temperatura para el día &nbsp;
-                {getWeekDay(dailyData?.day, "es-EN")}
-                &nbsp;
-                <Moment format="DD-MMMM-YYYY">{dailyData?.day}</Moment>
-              </Typography>
-
-              <Grid
-                container
-                spacing={{ xs: 4, md: 6 }}
-                columns={{ xs: 3, sm: 3, md: 7 }}
-                sx={{ margin: "0 0 4rem 0" }}
-              >
-                {Array.from(Array(dailyData.hourly_temperature.length)).map(
-                  (_, index) => (
-                    <Grid
-                      sx={{ margin: "4rem 0 0 0 " }}
-                      xs={1}
-                      sm={1}
-                      md={1}
-                      key={index}
-                    >
-                      <Item
-                        sx={{
-                          background: "#E6505A",
-                          opacity: 0.6,
-                          "&:hover": { opacity: 0.9 },
-                          "&:onclick": { width: "1.5rem" },
-                        }}
-                      >
-                        <Typography variant="h4" gutterBottom>
-                          {dailyData.hourly_temperature[index]} º
-                        </Typography>
-                      </Item>
-                    </Grid>
-                  )
-                )}
-              </Grid>
-            </>
-          ) : (
-            <></>
-          )}
+          <WeatherHourly dailyData={dailyData} />
         </>
       ) : (
         <Typography variant="h3" gutterBottom>
-          Select a city to get weather
+          Selecciona una ciudad para obtener el tiempo que va a hacer.
         </Typography>
       )}
     </Container>
